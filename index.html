@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lista de Compras</title>
+  <meta name="theme-color" content="#0ea5e9">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#121a2b;
+      --text:#e6eefc;
+      --muted:#9bb3d6;
+      --accent:#0ea5e9;
+      --danger:#ef4444;
+      --ok:#22c55e;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 20px;
+    }
+    *{box-sizing:border-box;font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, 'Helvetica Neue', Arial, 'Apple Color Emoji','Segoe UI Emoji';}
+    body{margin:0;background:linear-gradient(180deg,#0b1220,#0b1220 30%,#0e1628);color:var(--text);min-height:100svh;display:flex;justify-content:center}
+    .container{width:min(820px,100%);padding:20px 16px 100px}
+    header{display:flex;align-items:center;gap:12px;margin:8px 0 16px}
+    .logo{width:44px;height:44px;border-radius:12px;background:radial-gradient(100% 100% at 0% 0%, #27c1ff 0%, #0ea5e9 60%, #3b82f6 100%);box-shadow:var(--shadow);}
+    h1{font-size: clamp(22px, 4vw, 28px);margin:0}
+    .muted{color:var(--muted);font-size:14px}
+    .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px}
+    .row{display:flex;gap:10px;align-items:center}
+    input[type="text"]{flex:1;background:#0c1426;border:none;outline:none;color:var(--text);padding:14px 12px;border-radius:14px;font-size:16px}
+    button{border:none;cursor:pointer;border-radius:14px;padding:12px 14px;font-weight:600}
+    .btn{background:var(--accent);color:white;box-shadow:var(--shadow)}
+    .btn:active{transform:translateY(1px)}
+    .btn-ghost{background:#0c1426;color:var(--text)}
+    .btn-danger{background:var(--danger);color:white}
+    .btn-ok{background:var(--ok);color:white}
+    .list{margin-top:16px;display:grid;gap:8px}
+    .item{display:flex;gap:10px;align-items:center;background:#0e182a;border-radius:14px;padding:10px 12px}
+    .item input[type="checkbox"]{width:20px;height:20px}
+    .name{flex:1}
+    .name.done{text-decoration:line-through;color:#7fa0c5}
+    .cta{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    footer{position:fixed;bottom:10px;left:0;right:0;display:flex;justify-content:center}
+    .toast{background:#0c1426;color:var(--text);padding:10px 14px;border-radius:12px;box-shadow:var(--shadow);opacity:0;transform:translateY(10px);transition:.25s;max-width:92vw}
+    .toast.show{opacity:1;transform:translateY(0)}
+    .tiny{font-size:12px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo"></div>
+      <div>
+        <h1>Lista de Compras</h1>
+        <div class="muted">Offline • Instala no Android • Compartilha por WhatsApp</div>
+      </div>
+    </header>
+
+    <div class="card">
+      <div class="row">
+        <input id="texto" type="text" placeholder="Ex.: Arroz 5kg" autocomplete="off">
+        <button class="btn" id="addBtn">Adicionar</button>
+      </div>
+
+      <div class="cta">
+        <button class="btn-ghost" id="btnShare">Compartilhar</button>
+        <button class="btn-ghost" id="btnInstall" hidden>Instalar</button>
+        <button class="btn-danger tiny" id="btnLimpar">Limpar Concluídos</button>
+      </div>
+
+      <div class="list" id="lista"></div>
+    </div>
+  </div>
+
+  <footer>
+    <div id="toast" class="toast">Pronto ✅</div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
